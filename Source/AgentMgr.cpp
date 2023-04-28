@@ -16,6 +16,9 @@
 #include <GWCA/Managers/AgentMgr.h>
 #include <GWCA/Managers/ItemMgr.h>
 #include <GWCA/Managers/UIMgr.h>
+#include <GWCA/Managers/CtosMgr.h>
+
+#include <GWCA/Packets/Opcodes.h>
 
 #include <GWCA/Utilities/Hooker.h>
 #include <GWCA/Utilities/Scanner.h>
@@ -257,8 +260,8 @@ namespace GW {
         uint32_t GetLastDialogId() {
             return last_dialog_id;
         }
-        bool SendDialog(uint32_t dialog_id) {
-            return UI::SendUIMessage(UI::UIMessage::kSendDialog, (void*)dialog_id);
+        void SendDialog(uint32_t dialog_id) {
+            CtoS::SendPacket(0x8, GAME_CMSG_SEND_DIALOG, dialog_id);
         }
 
         AgentArray* GetAgentArray() {
