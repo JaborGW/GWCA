@@ -2,6 +2,8 @@
 
 #include <GWCA/Utilities/Debug.h>
 
+#include <cinttypes>
+
 namespace GW {
 
     // class Array

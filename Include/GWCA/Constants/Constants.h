@@ -7,6 +7,8 @@
 #include "QuestIDs.h"
 #include "Skills.h"
 
+#include <string>
+
 namespace GW {
     namespace Constants {
 
