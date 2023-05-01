@@ -4,9 +4,11 @@
 #include <GWCA/Constants/ItemIDs.h>
 
 #include <GWCA/Packets/StoC.h>
+#include <GWCA/Packets/Opcodes.h>
 
 #include <GWCA/Context/ItemContext.h>
 #include <GWCA/Context/WorldContext.h>
+#include <GWCA/Context/AccountContext.h>
 
 #include <GWCA/Utilities/Hooker.h>
 #include <GWCA/Utilities/Hook.h>
@@ -20,7 +22,7 @@
 #include <GWCA/Managers/StoCMgr.h>
 #include <GWCA/Managers/AgentMgr.h>
 #include <GWCA/Managers/UIMgr.h>
-#include <GWCA/Context/AccountContext.h>
+#include <GWCA/Managers/CtoSMgr.h>
 
 namespace {
     using namespace GW;
@@ -514,21 +516,8 @@ namespace GW {
             return ChangeGold(gold_character, gold_storage) ? will_move : 0;
         }
 
-        bool OpenLockedChest(bool use_key) {
-            auto* target = Agents::GetTarget();
-            if (!(OpenLockedChest_Func && target && target->GetIsGadgetType()))
-                return false;
-            auto* me = Agents::GetPlayer();
-            if (!(me && GetDistance(me->pos, target->pos) < Constants::Range::Area))
-                return false;
-            if (use_key) {
-                // TODO: Find matching key for chest to allow GWCA to use keys; how does the game know what dialog buttons to show?
-                use_key = false;
-            }
-            if (!use_key && !GetItemByModelId(Constants::ItemID::Lockpick))
-                return false;
-            OpenLockedChest_Func(use_key ? 0x1U : 0x2U);
-            return true;
+        bool OpenLockedChest(bool) { 
+            return CtoS::SendPacket(0x8, GAME_CMSG_SEND_SIGNPOST_DIALOG, 0x2);
         }
 
         bool MoveItem(const Item* from, const Bag* bag, uint32_t slot, uint32_t quantity) {

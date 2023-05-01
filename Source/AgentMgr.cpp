@@ -16,9 +16,12 @@
 #include <GWCA/Managers/AgentMgr.h>
 #include <GWCA/Managers/ItemMgr.h>
 #include <GWCA/Managers/UIMgr.h>
+#include <GWCA/Managers/CtosMgr.h>
 
 #include <GWCA/Utilities/Hooker.h>
 #include <GWCA/Utilities/Scanner.h>
+
+#include <GWCA/Packets/Opcodes.h>
 
 namespace {
     using namespace GW;
@@ -369,9 +372,9 @@ namespace GW {
         }
 
         bool GoSignpost(const Agent* agent, uint32_t call_target) {
-            if (!(InteractGadget_Func && agent && agent->GetIsGadgetType()))
+            if (!agent || !agent->GetIsGadgetType())
                 return false;
-            InteractGadget_Func(agent->agent_id, call_target ? 1U : 0U);
+            CtoS::SendPacket(0xC, GAME_CMSG_INTERACT_GADGET, agent->agent_id, call_target);
             return true;
         }
 
