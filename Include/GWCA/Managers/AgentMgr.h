@@ -34,7 +34,7 @@ namespace GW {
     namespace Agents {
         // === Dialogs ===
         // Same as pressing button (id) while talking to an NPC.
-        GWCA_API void SendDialog(uint32_t dialog_id); 
+        GWCA_API bool SendDialog(uint32_t dialog_id);
 
         // Returns last dialog id sent to the server. Requires the hook.
         GWCA_API bool GetIsAgentTargettable(const GW::Agent* agent);
