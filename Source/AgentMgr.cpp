@@ -261,7 +261,7 @@ namespace GW {
             return last_dialog_id;
         }
         bool SendDialog(uint32_t dialog_id) {
-            return UI::SendUIMessage(UI::UIMessage::kSendDialog, (void*)dialog_id);
+            return CtoS::SendPacket(0x8, GAME_CMSG_SEND_DIALOG, dialog_id);
         }
 
         AgentArray* GetAgentArray() {
