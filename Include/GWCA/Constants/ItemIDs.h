@@ -9,6 +9,11 @@ namespace GW {
             constexpr int GhostInTheBox = 6368;
             constexpr int GhastlyStone = 32557;
             constexpr int LegionnaireStone = 37810;
+            
+            constexpr int GuildLord = 36648;
+            constexpr int HighPriestZhang = 36649;
+            constexpr int GhostlyPriest = 36650;
+            constexpr int RiftWarden = 36651;
 
             // materials
             constexpr int Bone = 921;
