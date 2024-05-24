@@ -381,11 +381,7 @@ namespace GW {
         bool GetIsAgentTargettable(const GW::Agent* agent) {
             if (!agent) return false;
             if (const auto living = agent->GetAsAgentLiving()) {
-                if (living->IsPlayer())
-                    return true;
-                const GW::NPC* npc = GW::Agents::GetNPCByID(living->player_number);
-                if (npc && (npc->npc_flags & 0x10000) == 0)
-                    return true;
+                return true;
             }
             else if (const auto gadget = agent->GetAsAgentGadget()) {
                 if (GetAgentEncName(gadget))
