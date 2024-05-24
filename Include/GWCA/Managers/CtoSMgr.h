@@ -6,7 +6,7 @@
 #include <GWCA/Managers/Module.h>
 
 #ifndef GWCA_CTOS_ENABLED
-#define GWCA_CTOS_ENABLED 0
+#define GWCA_CTOS_ENABLED 1
 #endif
 
 namespace GW {

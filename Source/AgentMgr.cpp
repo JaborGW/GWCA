@@ -16,9 +16,12 @@
 #include <GWCA/Managers/AgentMgr.h>
 #include <GWCA/Managers/ItemMgr.h>
 #include <GWCA/Managers/UIMgr.h>
+#include <GWCA/Managers/CtoSMgr.h>
 
 #include <GWCA/Utilities/Hooker.h>
 #include <GWCA/Utilities/Scanner.h>
+
+#define GAME_CMSG_SEND_DIALOG (0x0039) // 57
 
 namespace {
     using namespace GW;
@@ -389,15 +392,10 @@ namespace GW {
             }
             return false;
         }
-        bool SendDialog(uint32_t dialog_id) {
-            const auto a = GW::Agents::GetAgentByID(dialog_agent_id);
-            if (!a) return false;
-            if (a->GetIsGadgetType()) {
-                return UI::SendUIMessage(UI::UIMessage::kSendGadgetDialog, (void*)dialog_id);
-            }
-            else {
-                return UI::SendUIMessage(UI::UIMessage::kSendAgentDialog, (void*)dialog_id);
-            }
+        bool Agents::SendDialog(uint32_t dialog_id)
+        {
+            CtoS::SendPacket(0x8, GAME_CMSG_SEND_DIALOG, dialog_id);
+            return true;
         }
 
         AgentArray* GetAgentArray() {
