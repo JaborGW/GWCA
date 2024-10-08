@@ -302,6 +302,7 @@ namespace GW {
             kEffectAdd                  = 0x10000000 | 0x55, // wparam = {agent_id, GW::Effect*}
             kEffectRenew                = 0x10000000 | 0x56, // wparam = GW::Effect*
             kEffectRemove               = 0x10000000 | 0x57, // wparam = effect id
+            kFinishSkillCast            = 0x10000000 | 0x5D, // wparam = {uint32_t agent_id, uint32_t skill_id }
             kUpdateSkillbar             = 0x10000000 | 0x5E, // wparam ={ uint32_t agent_id , ... }
             kSkillActivated             = 0x10000000 | 0x5b, // wparam ={ uint32_t agent_id , uint32_t skill_id }
             kTitleProgressUpdated       = 0x10000000 | 0x65, // wparam = title_id
