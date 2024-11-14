@@ -17,6 +17,7 @@ namespace {
     GwGetTransform_pt GwGetTransform_func;
 
     struct gwdx {
+        uint8_t h0000_1[0x128];
         /* +h0000 */
         uint8_t h0000[24];
         /* +h0018 */
