@@ -374,7 +374,10 @@ namespace {
         GWCA_ASSERT(IsTyping_FrameId);
         GWCA_ASSERT(UICallback_AssignEditableText_Func);
 #endif
+
+#ifndef IsPlugin
         HookBase::CreateHook((void**)&UICallback_ChatLogLine_Func, OnUICallback_ChatLogLine, (void**)&UICallback_ChatLogLine_Ret);
+#endif
         HookBase::CreateHook((void**)&StartWhisper_Func, OnStartWhisper_Func, (void**)& StartWhisper_Ret);
         HookBase::CreateHook((void**)&GetSenderColor_Func, OnGetSenderColor_Func, (void **)&GetSenderColor_Ret);
         HookBase::CreateHook((void**)&GetMessageColor_Func, OnGetMessageColor_Func, (void **)&GetMessageColor_Ret);
