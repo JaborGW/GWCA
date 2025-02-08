@@ -237,6 +237,20 @@ namespace GW {
 
     static_assert(sizeof(CompositeModelInfo) == 0x30);
 
+    struct SalvageSessionInfo {
+        void* vtable;
+        uint32_t frame_id;
+        uint32_t item_id;
+        uint32_t salvagable_1;      // Prefix
+        uint32_t salvagable_2;      // Suffix
+        uint32_t salvagable_3;      // Inscription
+        uint32_t chosen_salvagable; // 3 for materials
+        uint32_t h001c;
+        uint32_t kit_id;
+    };
+
+    static_assert(sizeof(SalvageSessionInfo) == 0x24);
+
     typedef Array<ItemID> MerchItemArray;
 
     inline size_t Bag::find1(uint32_t model_id, size_t pos) const {
