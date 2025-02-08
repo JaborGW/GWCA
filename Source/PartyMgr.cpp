@@ -42,6 +42,9 @@ namespace {
     DoAction_pt SetReadyStatus_Func = 0;
     DoAction_pt SetDifficulty_Func = 0;
 
+    DoAction_pt PartyAcceptInvite_Func = 0;
+    DoAction_pt PartyRejectInvite_Func = 0;
+
     typedef void(__cdecl* FlagHeroAgent_pt)(uint32_t agent_id,GW::GamePos* pos);
     FlagHeroAgent_pt FlagHeroAgent_Func = 0;
 
@@ -118,8 +121,8 @@ namespace {
 
         address = Scanner::Find("\x6a\x00\x68\x00\x02\x02\x00\xff\x77\x04", "xxxxxxxxxx");
         if (Scanner::IsValidPtr(address, ScannerSection::Section_TEXT)) {
-            //PartyRejectInvite_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address + 0xb6);
-            //PartyAcceptInvite_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address + 0xcf);
+            PartyRejectInvite_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address + 0xb6);
+            PartyAcceptInvite_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address + 0xcf);
         }
 
         GWCA_INFO("[SCAN] TickButtonUICallback Function = %p", TickButtonUICallback);
@@ -306,8 +309,7 @@ namespace GW {
         }
         bool RespondToPartyRequest(uint32_t party_id, bool accept) {
             (party_id, accept);
-            // @Robustness: Cycle invitations, make sure the party is found
-            /*if (accept) {
+            if (accept) {
                 if (!PartyAcceptInvite_Func)
                     return false;
                 PartyAcceptInvite_Func(party_id);
@@ -316,7 +318,7 @@ namespace GW {
                 if (!PartyRejectInvite_Func)
                     return false;
                 PartyRejectInvite_Func(party_id);
-            }*/
+            }
             return true;
         }
 
