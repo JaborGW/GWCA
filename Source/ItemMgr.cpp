@@ -247,7 +247,7 @@ namespace {
 
         SalvageStart_Func = (SalvageStart_pt)Scanner::ToFunctionStart(Scanner::Find("\x75\x14\x68\x25\x06\x00\x00", "xxxxxxx"));
 
-        IdentifyItem_Func = (IdentifyItem_pt)Scanner::ToFunctionStart(Scanner::Find("\x75\x1a\x68\x88\x05\x00\x00", "xxxxxxx"));
+        IdentifyItem_Func = (IdentifyItem_pt)Scanner::ToFunctionStart(Scanner::Find("\x75\x14\x68\x88\x05\x00\x00", "xxxxxxx"));
 
         address = Scanner::Find("\x83\xc4\x40\x6a\x00\x6a\x19", "xxxxxxx", -0x4e);
         DropItem_Func = (DropItem_pt)Scanner::FunctionFromNearCall(address);
