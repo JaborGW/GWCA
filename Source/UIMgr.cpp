@@ -936,6 +936,15 @@ namespace GW {
             return frame ? frame->relation.GetParent() : nullptr;
         }
 
+        Frame* GetChildFrame(Frame* parent, const std::initializer_list<uint32_t> child_offsets)
+        {
+            auto id = parent->frame_id;
+            for (uint32_t child_offset : child_offsets) {
+                id = GetChildFrameId_Func(id, child_offset);
+            }
+            return GetFrameById(id);
+        }
+
         Frame* GetFrameById(uint32_t frame_id) {
             if (!(s_FrameArray && s_FrameArray->size() > frame_id))
                 return nullptr;
