@@ -589,7 +589,7 @@ namespace GW {
             salvage_context->salvagable_2 = 0;
             salvage_context->salvagable_3 = 0;
             // Click "salvage"
-            const auto btn = GW::UI::GetChildFrame(GW::UI::GetFrameById(salvage_context->frame_id), {2});
+            const auto btn = GW::UI::GetChildFrame(GW::UI::GetFrameById(salvage_context->frame_id), 2);
             bool ok = GW::UI::ButtonClick(btn);
             if (salvage_context) *salvage_context = prev_context;
             return ok;

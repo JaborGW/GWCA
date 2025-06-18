@@ -104,7 +104,7 @@ namespace {
         address = Scanner::FindAssertion("\\Code\\Gw\\Ui\\Game\\Party\\PtPlayer.cpp", "No valid case for switch variable '\"\"'", 0, 0x27);
         SetReadyStatus_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address);
 
-        address = Scanner::Find("\x8d\x45\x10\x50\x56\x6a\x4d\x57","xxxxxxxx");
+        address = Scanner::Find("\x8d\x45\x10\x50\x56\x6a\x4e\x57","xxxxxxxx");
         if (Scanner::IsValidPtr(address, ScannerSection::Section_TEXT)) {
             address = Scanner::FindInRange("\x83\xc4\x04\x50\xe8", "xxxxx", 4, address, address + 0x64);
             FlagHeroAgent_Func = (FlagHeroAgent_pt)Scanner::FunctionFromNearCall(address);

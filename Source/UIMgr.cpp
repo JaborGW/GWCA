@@ -321,10 +321,10 @@ namespace {
             WorldMapState_Addr = *(uintptr_t*)address;
 
 
-        address = Scanner::Find("\x83\xfb\x46\x73\x14", "xxxxx", -0x34);
+        address = Scanner::Find("\x8D\x46\x04\xFF\x75\x10", "xxxxx", -0xCA);
         if (address) {
             SendFrameUIMessageById_Func = (SendFrameUIMessageById_pt)address;
-            SendFrameUIMessage_Func = (SendFrameUIMessage_pt)Scanner::FunctionFromNearCall(address + 0x67);
+            SendFrameUIMessage_Func = (SendFrameUIMessage_pt)Scanner::Find("\x8D\x46\x04\xFF\x75\x10", "xxxxx", -0x5A);
         }
 
 
