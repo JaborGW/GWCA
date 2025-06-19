@@ -343,7 +343,7 @@ namespace {
         GetRootFrame_Func = (GetRootFrame_pt)Scanner::Find("\x05\xe0\xfe\xff\xff\xc3", "xxxxxx", -0x3c);
         
 
-        SendUIMessage_Func = (SendUIMessage_pt)Scanner::ToFunctionStart(Scanner::Find("\xB9\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x5D\xC3\x89\x45\x08", "x????x????xxxxx"));
+        SendUIMessage_Func = (SendUIMessage_pt)Scanner::ToFunctionStart(Scanner::Find("\xE8\x00\x00\x00\x00\x5D\xC3\x89\x45\x08\x5D\xE9", "x????xxxxxxx"));
         
 
         LoadSettings_Func = (LoadSettings_pt)Scanner::ToFunctionStart(Scanner::Find("\xE8\x00\x00\x00\x00\xFF\x75\x0C\xFF\x75\x08\x6A\x00", "x????xxxxxxxx"));
