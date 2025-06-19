@@ -166,7 +166,7 @@ namespace {
     void __cdecl OnUICallback_ChatLogLine(GW::UI::InteractionMessage* message, void* wParam, void* lParam) {
         GW::Hook::EnterHook();
         switch (static_cast<uint32_t>(message->message_id)) {
-        case 0x49: {
+        case 0x4A: {
             ShowTimestamps = GW::UI::GetPreference(GW::UI::FlagPreference::ShowChatTimestamps);
             if (ShowTimestamps != block_chat_timestamps.GetIsActive()) {
                 block_chat_timestamps.TogglePatch();
@@ -374,7 +374,7 @@ namespace {
         GWCA_ASSERT(IsTyping_FrameId);
         GWCA_ASSERT(UICallback_AssignEditableText_Func);
 #endif
-        //HookBase::CreateHook((void**)&UICallback_ChatLogLine_Func, OnUICallback_ChatLogLine, (void**)&UICallback_ChatLogLine_Ret);
+        HookBase::CreateHook((void**)&UICallback_ChatLogLine_Func, OnUICallback_ChatLogLine, (void**)&UICallback_ChatLogLine_Ret);
         HookBase::CreateHook((void**)&StartWhisper_Func, OnStartWhisper_Func, (void**)& StartWhisper_Ret);
         HookBase::CreateHook((void**)&GetSenderColor_Func, OnGetSenderColor_Func, (void **)&GetSenderColor_Ret);
         HookBase::CreateHook((void**)&GetMessageColor_Func, OnGetMessageColor_Func, (void **)&GetMessageColor_Ret);
