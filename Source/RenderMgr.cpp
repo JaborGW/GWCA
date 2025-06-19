@@ -105,13 +105,13 @@ namespace {
     {
         InitializeCriticalSection(&mutex);
 
-        GwReset_Func = GwReset_Func = (GwReset_pt)Scanner::ToFunctionStart(Scanner::Find("\x75\x14\x68\x94\x02\x00\x00", "xxxxxxx"));
+        GwReset_Func = (GwReset_pt)Scanner::ToFunctionStart(Scanner::Find("\x75\x14\x68\x94\x02\x00\x00", "xxxxxxx"));
         
         GwEndScene_Func = (GwEndScene_pt)Scanner::ToFunctionStart(Scanner::Find("\x75\x28\x68\xc4\x06\x00\x00", "xxxxxxx"));
         
-        GwGetTransform_func = (GwGetTransform_pt) Scanner::ToFunctionStart(Scanner::Find("\x7c\x14\x68\xdb\x02\x00\x00", "xxxxxxx"));
+        GwGetTransform_func = (GwGetTransform_pt)Scanner::ToFunctionStart(Scanner::Find("\x7c\x14\x68\xdb\x02\x00\x00", "xxxxxxx"));
 
-        ScreenCapture_Func = (GwEndScene_pt)Scanner::ToFunctionStart(Scanner::FindAssertion("Dx9Dev.cpp","No valid case for switch variable 'mode.Format'",0,0), 0xfff);
+        ScreenCapture_Func = (GwEndScene_pt)Scanner::ToFunctionStart(Scanner::FindAssertion("Dx9Dev.cpp", "No valid case for switch variable 'mode.Format'", 0, 0), 0xfff);
 
         GWCA_INFO("[SCAN] GwGetTransform = %p", GwGetTransform_func);
         GWCA_INFO("[SCAN] GwReset = %p", GwReset_Func);

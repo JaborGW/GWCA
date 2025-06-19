@@ -321,10 +321,11 @@ namespace {
             WorldMapState_Addr = *(uintptr_t*)address;
 
 
-        address = Scanner::Find("\x8D\x46\x04\xFF\x75\x10", "xxxxx", -0xCA);
+        address = Scanner::Find("\x83\xfb\x47\x73\x14", "xxxxx", -0x34);
         if (address) {
             SendFrameUIMessageById_Func = (SendFrameUIMessageById_pt)address;
-            SendFrameUIMessage_Func = (SendFrameUIMessage_pt)Scanner::Find("\x8D\x46\x04\xFF\x75\x10", "xxxxx", -0x5A);
+            // SendFrameUIMessage_Func = (SendFrameUIMessage_pt)Scanner::Find("\x8D\x46\x04\xFF\x75\x10", "xxxxx", -0x5A);
+            SendFrameUIMessage_Func = (SendFrameUIMessage_pt)Scanner::FunctionFromNearCall(address + 0x67);
         }
 
 
@@ -342,7 +343,7 @@ namespace {
         GetRootFrame_Func = (GetRootFrame_pt)Scanner::Find("\x05\xe0\xfe\xff\xff\xc3", "xxxxxx", -0x3c);
         
 
-        SendUIMessage_Func = (SendUIMessage_pt)Scanner::ToFunctionStart(Scanner::Find("\xE8\x00\x00\x00\x00\x5D\xC3\x89\x45\x08\x5D\xE9", "x????xxxxxxx"));
+        SendUIMessage_Func = (SendUIMessage_pt)Scanner::ToFunctionStart(Scanner::Find("\xB9\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x5D\xC3\x89\x45\x08", "x????x????xxxxx"));
         
 
         LoadSettings_Func = (LoadSettings_pt)Scanner::ToFunctionStart(Scanner::Find("\xE8\x00\x00\x00\x00\xFF\x75\x0C\xFF\x75\x08\x6A\x00", "x????xxxxxxxx"));
