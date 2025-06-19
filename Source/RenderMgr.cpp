@@ -105,7 +105,7 @@ namespace {
     {
         InitializeCriticalSection(&mutex);
 
-        GwReset_Func = (GwReset_pt)Scanner::ToFunctionStart(Scanner::Find("\x75\x14\x68\x94\x02\x00\x00", "xxxxxxx"));
+        GwReset_Func = (GwReset_pt)Scanner::ToFunctionStart(Scanner::Find("\x3B\x4D\xB4\x89", "xxxx"), 0xfff);
         
         GwEndScene_Func = (GwEndScene_pt)Scanner::ToFunctionStart(Scanner::Find("\x75\x28\x68\xc4\x06\x00\x00", "xxxxxxx"));
         
