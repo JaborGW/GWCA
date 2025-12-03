@@ -32,7 +32,7 @@ namespace {
 
 
         // @TODO: This patch is actually to stop the dx9 device setting a render setting; we could do this better by hooking the dx9 vtable directly - maybe render mgr?
-        address = Scanner::Find("\x83\xE0\x01\x8B\x09\x50\x6A\x1C", "xxxxxxxx", +2);
+        address = Scanner::Find("\x83\xe0\x01\x50\x6a\x1c\xff\x75", "xxxxxxxx", +2);
         if(address)
             patch_fog.SetPatch(address, "\x00", 1);
 
