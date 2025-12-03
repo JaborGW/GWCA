@@ -65,7 +65,7 @@ namespace {
     {
         InitializeCriticalSection(&mutex);
 
-        uintptr_t address = Scanner::Find("\x8b\x75\x08\xdd\xd9\xf6\xc4\x41","xxxxxxxx",-0x20);
+        uintptr_t address = Scanner::Find("\x8b\x75\x08\x57\x8b\x7d\x0c\xdd","xxxxxxxx",-0x20);
         LeaveGameThread_Func = (Render_t)address;
 
 
