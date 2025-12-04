@@ -145,7 +145,7 @@ namespace {
         if (address && Scanner::IsValidPtr(*(uintptr_t*)address))
             AgentArrayPtr = *(uintptr_t*)address;
 
-        address = Scanner::Find("\x5D\xE9\x00\x00\x00\x00\x55\x8B\xEC\x53","xx????xxxx", -0xE);
+        address = Scanner::Find("\x5d\xe9\x00\x00\x00\x00\x55\x8b\xec\x56\x57\x8b\x7d","xx????xxxxxxx", -0xE);
         if (address && Scanner::IsValidPtr(*(uintptr_t*)address))
             PlayerAgentIdPtr = *(uintptr_t*)address;
 
