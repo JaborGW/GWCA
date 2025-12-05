@@ -327,12 +327,12 @@ namespace {
 
         address = Scanner::FindAssertion("\\Code\\Engine\\Controls\\CtlEdit.cpp","charCount >= 1",0,0);
         if (address)
-            address = Scanner::FindInRange("\x89\x7e\x44", "xxx", 5, address, address + 0x40);
+            address = Scanner::FindInRange("\x89\x7e\x50", "xxx", 5, address, address + 0x40);
         if(address && Scanner::IsValidPtr(*(uintptr_t*)address))
             IsTyping_FrameId = *(uint32_t **)address;
 
-        address = Scanner::Find("\x6a\x06\x68\x00\x03\x80\x00","xxxxxxx",-0x4);
-        if (address && Scanner::IsValidPtr(*(uintptr_t*)address, ScannerSection::Section_TEXT))
+        address = Scanner::Find("\xFF\x76\x54\x53", "xxxx", -0x86);
+        if (address)
             UICallback_AssignEditableText_Func = *(UI::UIInteractionCallback*)address;
 
 

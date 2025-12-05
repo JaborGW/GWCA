@@ -140,9 +140,9 @@ namespace {
     void Init() {
 
         DWORD address = 0;
-        address = GW::Scanner::Find("\x8D\x04\xB6\xC1\xE0\x05\x05", "xxxxxxx", +7);
-        if (Scanner::IsValidPtr(*(uintptr_t*)address, GW::ScannerSection::Section_RDATA))
-            skill_array_addr = *(Skill**)address;
+        address = GW::Scanner::FindAssertion("ConstSkill.cpp", "index < arrsize(s_energyTable)", 0, 0);
+        if (address)
+            skill_array_addr = *(Skill**)address - 0x26;
 
         address = GW::Scanner::Find("\xba\x33\x00\x00\x00\x89\x08\x8d\x40\x04", "x?xxxxxxxx", -4);
         if (Scanner::IsValidPtr(*(uintptr_t*)address, GW::ScannerSection::Section_RDATA))

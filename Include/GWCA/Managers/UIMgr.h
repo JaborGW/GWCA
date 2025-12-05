@@ -278,11 +278,11 @@ namespace GW {
             kNone = 0x0,
             kInitFrame                  = 0x9,
             kDestroyFrame               = 0xb,
-            kKeyDown                    = 0x1e, // wparam = UIPacket::kKeyAction*
-            kKeyUp                      = 0x20, // wparam = UIPacket::kKeyAction*
+            kKeyDown                    = 0x20, // wparam = UIPacket::kKeyAction*
+            kKeyUp                      = 0x22, // wparam = UIPacket::kKeyAction*
             kMouseClick                 = 0x22, // wparam = UIPacket::kMouseClick*
-            kMouseClick2                = 0x2e, // wparam = UIPacket::kMouseAction*
-            kMouseAction                = 0x2f, // wparam = UIPacket::kMouseAction*
+            kMouseClick2                = 0x31, // wparam = UIPacket::kMouseAction*
+            kMouseAction                = 0x32, // wparam = UIPacket::kMouseAction*
             kUpdateAgentEffects         = 0x10000000 | 0x9,
             kRerenderAgentModel         = 0x10000000 | 0x7, // wparam = uint32_t agent_id
             kShowAgentNameTag           = 0x10000000 | 0x19, // wparam = AgentNameTagInfo*

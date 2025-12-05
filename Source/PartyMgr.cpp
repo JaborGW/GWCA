@@ -86,10 +86,9 @@ namespace {
         if (address)
             TickButtonUICallback = (UI::UIInteractionCallback)Scanner::FunctionFromNearCall(*(uintptr_t*)address);
 
-        address = Scanner::Find("\x8b\x75\x08\x68\x28\x01\x00\x10", "xxxxxxx"); // NB: UI Message 0x10000128 lands within hard mode button ui callback
-        if (address)
-            address = Scanner::FindInRange("\xff\x70\x20\xe8", "xxxx", 3, address, address + 0xff);
-        SetDifficulty_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address);
+        address = Scanner::Find("\x89\x46\x20\xF7", "xxxx", 0xBB); // NB: UI Message 0x10000128 lands within hard mode button ui callback
+        if (address) 
+            SetDifficulty_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address);
 
         address = Scanner::Find("\x8b\x78\x4c\x8d\x8f\x9c\x00\x00\x00", "xxxxxxxxx", -0xc);
         if (Scanner::IsValidPtr(address, ScannerSection::Section_TEXT))
@@ -99,14 +98,14 @@ namespace {
         PartySearchButtonCallback_Func = (PartySearchButtonCallback_pt)Scanner::ToFunctionStart(Scanner::FindAssertion("\\Code\\Gw\\Ui\\Game\\Party\\PtSearch.cpp", "m_activeList == LIST_HEROES",0,0));
 
         // Party Window Button Callback functions
-        PartyWindowButtonCallback_Func = (PartySearchButtonCallback_pt)Scanner::ToFunctionStart(Scanner::FindAssertion("\\Code\\Gw\\Ui\\Game\\Party\\PtButtons.cpp", "m_selection.agentId",0,0));
-
+        PartyWindowButtonCallback_Func = (PartySearchButtonCallback_pt)Scanner::ToFunctionStart(Scanner::Find("\x8D\x77\x24\x56", "xxxx"));
+        
         address = Scanner::FindAssertion("\\Code\\Gw\\Ui\\Game\\Party\\PtPlayer.cpp", "No valid case for switch variable '\"\"'", 0, 0x27);
         SetReadyStatus_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address);
 
-        address = Scanner::Find("\x8d\x45\x10\x50\x56\x6a\x4e\x57","xxxxxxxx");
+        address = Scanner::Find("\x8d\x45\x10\x50\x56\x6a\x5b\x57","xxxxxxxx");
         if (Scanner::IsValidPtr(address, ScannerSection::Section_TEXT)) {
-            address = Scanner::FindInRange("\x83\xc4\x04\x50\xe8", "xxxxx", 4, address, address + 0x64);
+            address = Scanner::FindInRange("\x8d\x4d\xe0\x51\x50\xe8", "xxxxxx", 5, address, address + 0x64);
             FlagHeroAgent_Func = (FlagHeroAgent_pt)Scanner::FunctionFromNearCall(address);
             if(address) address = Scanner::FindInRange("\xc7\x45\xdc", "xxx", 7, address, address + 0x64);
             FlagAll_Func = (FlagAll_pt)Scanner::FunctionFromNearCall(address);
