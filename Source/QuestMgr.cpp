@@ -58,7 +58,7 @@ namespace {
     void Init() {
         DWORD address = 0;
 
-        address = Scanner::Find("\xC7\x45\xF8\x02\x00\x00\x00\x50\xC7", "xxxxxxxxx", -0x45);
+        address = Scanner::Find("\xC7\x45\xF8\x02\x00\x00\x00\x50\xC7", "xxxxxxxxx", +0x55);
         AbandonQuest_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address);
 
         address = Scanner::Find("\x75\x14\x68\x61\x10\x00\x00", "xxxxxxx");

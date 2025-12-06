@@ -270,7 +270,7 @@ namespace {
 
     void __fastcall OnSendFrameUIMessage(Array<UI::UIInteractionCallback>* frame_callbacks, void*, UI::UIMessage message_id, void* wParam, void* lParam) {
         HookBase::EnterHook();
-        const auto frame = (UI::Frame*)(((uintptr_t)frame_callbacks) - 0xA0);
+        const auto frame = (UI::Frame*)(((uintptr_t)frame_callbacks) - 0xA8);
         GWCA_ASSERT(&frame->frame_callbacks == frame_callbacks);
         UI::SendFrameUIMessage(frame, message_id, wParam, lParam);
         HookBase::LeaveHook();
@@ -852,7 +852,7 @@ namespace GW {
                 uint32_t wparam;
                 uint32_t lparam;
             };
-            button_param wparam = { 0, btn_frame->field100_0x1a8,0 };
+            button_param wparam = { 0, btn_frame->field100_0x1b0, 0};
             action.wparam = &wparam;
             action.current_state = 0x6;
 

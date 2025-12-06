@@ -214,7 +214,7 @@ namespace GW {
         }
 
         bool ReturnToOutpost() {
-            return UI::ButtonClick(UI::GetChildFrame(UI::GetFrameByLabel(L"DlgRedirect"), 0));
+            return UI::ButtonClick(UI::GetChildFrame(UI::GetFrameByLabel(L"DlgRedirect"), 1));
         }
 
         bool GetIsPartyInHardMode() {
@@ -326,7 +326,7 @@ namespace GW {
                 return false;
 
             uint32_t wparam[4] = { 0 };
-            wparam[2] = 0x6;
+            wparam[2] = 0x7;
             wparam[1] = 0x1;
 
             uint32_t ctx[13] = { 0 };

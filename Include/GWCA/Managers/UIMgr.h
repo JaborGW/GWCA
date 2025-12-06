@@ -145,72 +145,76 @@ namespace GW {
             uint32_t field22_0x58;
             uint32_t field23_0x5c;
             uint32_t field24_0x60;
-            uint32_t field25_0x64;
-            uint32_t field26_0x68;
-            uint32_t field27_0x6c;
-            uint32_t field28_0x70;
-            uint32_t field29_0x74;
-            uint32_t field30_0x78;
-            GW::Array<void*> field31_0x7c;
-            uint32_t field32_0x8c;
-            uint32_t field33_0x90;
-            uint32_t field34_0x94;
-            uint32_t field35_0x98;
-            uint32_t field36_0x9c;
+            uint32_t field24a_0x64;
+            uint32_t field24b_0x68;
+            uint32_t field25_0x6c;
+            uint32_t field26_0x70;
+            uint32_t field27_0x74;
+            uint32_t field28_0x78;
+            uint32_t field29_0x7c;
+            uint32_t field30_0x80;
+            GW::Array<void*> field31_0x84;
+            uint32_t field32_0x94;
+            uint32_t field33_0x98;
+            uint32_t field34_0x9c;
+            uint32_t field35_0xa0;
+            uint32_t field36_0xa4;
             GW::Array<UIInteractionCallback> frame_callbacks;
             uint32_t child_offset_id; // Offset of this child in relation to its parent
-            uint32_t frame_id; // Offset in the global frame array
-            uint32_t field40_0xb8;
-            uint32_t field41_0xbc;
-            uint32_t field42_0xc0;
-            uint32_t field43_0xc4;
-            uint32_t field44_0xc8;
-            uint32_t field45_0xcc;
+            uint32_t frame_id;        // Offset in the global frame array
+            uint32_t field40_0xc0;
+            uint32_t field41_0xc4;
+            uint32_t field42_0xc8;
+            uint32_t field43_0xcc;
+            uint32_t field44_0xd0;
+            uint32_t field45_0xd4;
             FramePosition position;
-            uint32_t field63_0x114;
-            uint32_t field64_0x118;
-            uint32_t field65_0x11c;
+            uint32_t field63_0x11c;
+            uint32_t field64_0x120;
+            uint32_t field65_0x124;
             FrameRelation relation;
-            uint32_t field73_0x13c;
-            uint32_t field74_0x140;
-            uint32_t field75_0x144;
-            uint32_t field76_0x148;
-            uint32_t field77_0x14c;
-            uint32_t field78_0x150;
-            uint32_t field79_0x154;
-            uint32_t field80_0x158;
-            uint32_t field81_0x15c;
-            uint32_t field82_0x160;
-            uint32_t field83_0x164;
-            uint32_t field84_0x168;
-            uint32_t field85_0x16c;
-            uint32_t field86_0x170;
-            uint32_t field87_0x174;
-            uint32_t field88_0x178;
-            uint32_t field89_0x17c;
-            uint32_t field90_0x180;
-            uint32_t field91_0x184;
-            uint32_t field92_0x188;
-            uint32_t field93_0x18c;
-            uint32_t field94_0x190;
-            uint32_t field95_0x194;
-            uint32_t field96_0x198;
-            uint32_t field97_0x19c;
-            uint32_t field98_0x1a0;
+            uint32_t field73_0x144;
+            uint32_t field74_0x148;
+            uint32_t field75_0x14c;
+            uint32_t field76_0x150;
+            uint32_t field77_0x154;
+            uint32_t field78_0x158;
+            uint32_t field79_0x15c;
+            uint32_t field80_0x160;
+            uint32_t field81_0x164;
+            uint32_t field82_0x168;
+            uint32_t field83_0x16c;
+            uint32_t field84_0x170;
+            uint32_t field85_0x174;
+            uint32_t field86_0x178;
+            uint32_t field87_0x17c;
+            uint32_t field88_0x180;
+            uint32_t field89_0x184;
+            uint32_t field90_0x188;
+            uint32_t frame_state;
+            uint32_t field92_0x190;
+            uint32_t field93_0x194;
+            uint32_t field94_0x198;
+            uint32_t field95_0x19c;
+            uint32_t field96_0x1a0;
+            uint32_t field97_0x1a4;
+            uint32_t field98_0x1a8;
             TooltipInfo* tooltip_info;
-            uint32_t field100_0x1a8;
+            uint32_t field100_0x1b0;
+            uint32_t field101_0x1b4;
+            uint32_t field102_0x1b8;
+            uint32_t field103_0x1bc;
+            uint32_t field104_0x1c0;
+            uint32_t field105_0x1c4;
 
-            bool IsCreated() const {
-                return (field91_0x184 & 4) != 0;
-            }
-
-            bool IsVisible() const {
-                return visibility_flags == 0;
-            }
+            bool IsCreated() const { return (frame_state & 0x4) != 0; }
+            bool IsVisible() const { return !IsHidden(); }
+            bool IsHidden() const { return (frame_state & 0x200) != 0; }
+            bool IsDisabled() const { return (frame_state & 0x10) != 0; }
         };
-        static_assert(sizeof(Frame) == 0x1ac);
+        static_assert(sizeof(Frame) == 0x1c8);
 
-        static_assert(offsetof(Frame, relation) == 0x120);
+        static_assert(offsetof(Frame, relation) == 0x128);
 
         struct AgentNameTagInfo {
             /* +h0000 */ uint32_t agent_id;
@@ -280,7 +284,7 @@ namespace GW {
             kDestroyFrame               = 0xb,
             kKeyDown                    = 0x20, // wparam = UIPacket::kKeyAction*
             kKeyUp                      = 0x22, // wparam = UIPacket::kKeyAction*
-            kMouseClick                 = 0x22, // wparam = UIPacket::kMouseClick*
+            kMouseClick                 = 0x24, // wparam = UIPacket::kMouseClick*
             kMouseClick2                = 0x31, // wparam = UIPacket::kMouseAction*
             kMouseAction                = 0x32, // wparam = UIPacket::kMouseAction*
             kUpdateAgentEffects         = 0x10000000 | 0x9,
@@ -351,28 +355,28 @@ namespace GW {
             kPreferenceFlagChanged      = 0x10000000 | 0x13F, // wparam = UiPacket::kPreferenceFlagChanged
             kPreferenceValueChanged     = 0x10000000 | 0x140, // wparam = UiPacket::kPreferenceValueChanged
             kUIPositionChanged          = 0x10000000 | 0x141, // wparam = UIPacket::kUIPositionChanged
-            kQuestAdded                 = 0x10000000 | 0x149, // wparam = { quest_id, ... }
-            kQuestDetailsChanged        = 0x10000000 | 0x14A, // wparam = { quest_id, ... }
-            kClientActiveQuestChanged   = 0x10000000 | 0x14C, // wparam = { quest_id, ... }. Triggered when the game requests the current quest to change
-            kServerActiveQuestChanged   = 0x10000000 | 0x14E, // wparam = UIPacket::kServerActiveQuestChanged*. Triggered when the server requests the current quest to change
-            kUnknownQuestRelated        = 0x10000000 | 0x14F, 
-            kObjectiveAdd               = 0x10000000 | 0x155, // wparam = UIPacket::kObjectiveAdd*
-            kObjectiveComplete          = 0x10000000 | 0x156, // wparam = UIPacket::kObjectiveComplete*
-            kObjectiveUpdated           = 0x10000000 | 0x157, // wparam = UIPacket::kObjectiveUpdated*
-            kTradeSessionStart          = 0x10000000 | 0x160, // wparam = { trade_state, player_number }
-            kTradeSessionUpdated        = 0x10000000 | 0x166, // no args
-            kCheckUIState               = 0x10000000 | 0x170, // Undocumented
-            kCloseSettings              = 0x10000000 | 0x174, // Undocumented
-            kChangeSettingsTab          = 0x10000000 | 0x175, // wparam = uint32_t is_interface_tab
-            kGuildHall                  = 0x10000000 | 0x177, // wparam = gh key (uint32_t[4])
-            kLeaveGuildHall             = 0x10000000 | 0x179,
-            kTravel                     = 0x10000000 | 0x17A,
-            kOpenWikiUrl                = 0x10000000 | 0x17B, // wparam = char* url
-            kAppendMessageToChat        = 0x10000000 | 0x189, // wparam = wchar_t* message
-            kHideHeroPanel              = 0x10000000 | 0x197, // wparam = hero_id
-            kShowHeroPanel              = 0x10000000 | 0x198, // wparam = hero_id
-            kMoveItem                   = 0x10000000 | 0x19e, // wparam = { item_id, to_bag, to_slot, bool prompt }
-            kInitiateTrade              = 0x10000000 | 0x1A0,
+            kQuestAdded                 = 0x10000000 | 0x14C, // wparam = { quest_id, ... }
+            kQuestDetailsChanged        = 0x10000000 | 0x14D, // wparam = { quest_id, ... }
+            kClientActiveQuestChanged   = 0x10000000 | 0x14F, // wparam = { quest_id, ... }. Triggered when the game requests the current quest to change
+            kServerActiveQuestChanged   = 0x10000000 | 0x151, // wparam = UIPacket::kServerActiveQuestChanged*. Triggered when the server requests the current quest to change
+            kUnknownQuestRelated        = 0x10000000 | 0x152, 
+            kObjectiveAdd               = 0x10000000 | 0x158, // wparam = UIPacket::kObjectiveAdd*
+            kObjectiveComplete          = 0x10000000 | 0x159, // wparam = UIPacket::kObjectiveComplete*
+            kObjectiveUpdated           = 0x10000000 | 0x15A, // wparam = UIPacket::kObjectiveUpdated*
+            kTradeSessionStart          = 0x10000000 | 0x163, // wparam = { trade_state, player_number }
+            kTradeSessionUpdated        = 0x10000000 | 0x169, // no args
+            kCheckUIState               = 0x10000000 | 0x173, // Undocumented
+            kCloseSettings              = 0x10000000 | 0x177, // Undocumented
+            kChangeSettingsTab          = 0x10000000 | 0x178, // wparam = uint32_t is_interface_tab
+            kGuildHall                  = 0x10000000 | 0x17A, // wparam = gh key (uint32_t[4])
+            kLeaveGuildHall             = 0x10000000 | 0x17C,
+            kTravel                     = 0x10000000 | 0x17D,
+            kOpenWikiUrl                = 0x10000000 | 0x17E, // wparam = char* url
+            kAppendMessageToChat        = 0x10000000 | 0x18C, // wparam = wchar_t* message
+            kHideHeroPanel              = 0x10000000 | 0x19A, // wparam = hero_id
+            kShowHeroPanel              = 0x10000000 | 0x19B, // wparam = hero_id
+            kMoveItem                   = 0x10000000 | 0x1A2, // wparam = { item_id, to_bag, to_slot, bool prompt }
+            kInitiateTrade              = 0x10000000 | 0x1A4,
             kOpenTemplate               = 0x10000000 | 0x1B9, // wparam = GW::UI::ChatTemplate*
 
             // GWCA Client to Server commands. Only added the ones that are used for hooks, everything else goes straight into GW
