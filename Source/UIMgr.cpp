@@ -270,7 +270,7 @@ namespace {
 
     void __fastcall OnSendFrameUIMessage(Array<UI::UIInteractionCallback>* frame_callbacks, void*, UI::UIMessage message_id, void* wParam, void* lParam) {
         HookBase::EnterHook();
-        const auto frame = (UI::Frame*)(((uintptr_t)frame_callbacks) - 0xA0);
+        const auto frame = (UI::Frame*)(((uintptr_t)frame_callbacks) - 0xA8);
         GWCA_ASSERT(&frame->frame_callbacks == frame_callbacks);
         UI::SendFrameUIMessage(frame, message_id, wParam, lParam);
         HookBase::LeaveHook();
@@ -435,7 +435,7 @@ namespace {
         
 
         // NB: 0x66 is the size of the window info array
-        SetWindowVisible_Func = (SetWindowVisible_pt)Scanner::ToFunctionStart(Scanner::Find("\x8B\x75\x08\x83\xFE\x66\x7C\x19\x68", "xxxxxxxxx"));
+        SetWindowVisible_Func = (SetWindowVisible_pt)Scanner::ToFunctionStart(Scanner::Find("\x8B\x75\x08\x83\xFE\x69\x7C\x19\x68", "xxxxxxxxx"));
         if (SetWindowVisible_Func) {
             SetWindowPosition_Func = reinterpret_cast<SetWindowPosition_pt>((uintptr_t)SetWindowVisible_Func - 0xE0);
             address = (uintptr_t)SetWindowVisible_Func + 0x49;
@@ -461,7 +461,7 @@ namespace {
 
         address = GW::Scanner::Find("\x74\x12\x6a\x16\x6a\x00", "xxxxxx", 0x6);
         GetGraphicsRendererValue_Func = (GetGraphicsRendererValue_pt)GW::Scanner::FunctionFromNearCall(address);
-        SetGraphicsRendererValue_Func = (SetGraphicsRendererValue_pt)Scanner::ToFunctionStart(Scanner::Find("\x68\x8e\x07\x00\x00\xba\x18\x1f", "xxxxxxxx"));
+        SetGraphicsRendererValue_Func = (SetGraphicsRendererValue_pt)Scanner::ToFunctionStart(Scanner::Find("\x8D\x47\xE9\xF7", "xxxx"));
 
 
         address = GW::Scanner::FindAssertion("\\Code\\Gw\\Ui\\Dialog\\DlgOptGr.cpp", "multiSampleIndex != CTL_DROPLIST_INDEX_NULL", 0, -0x46);
@@ -846,15 +846,15 @@ namespace GW {
 
             GW::UI::UIPacket::kMouseAction action{};
             
-            action.child_frame_id_dupe = action.child_frame_id = btn_frame->child_offset_id;
+            action.child_offset_id = action.frame_id = btn_frame->child_offset_id;
             struct button_param {
                 uint32_t unk;
                 uint32_t wparam;
                 uint32_t lparam;
             };
-            button_param wparam = { 0, btn_frame->field100_0x1a8,0 };
+            button_param wparam = { 0, btn_frame->field100_0x1b0, 0};
             action.wparam = &wparam;
-            action.current_state = 0x6;
+            action.current_state = GW::UI::UIPacket::ActionState::MouseDown;
 
             return SendFrameUIMessage(parent_frame, GW::UI::UIMessage::kMouseClick2, &action);
         }

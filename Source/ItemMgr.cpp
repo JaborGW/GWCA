@@ -258,13 +258,13 @@ namespace {
         address = Scanner::Find("\x83\xc4\x40\x6a\x00\x6a\x19", "xxxxxxx", -0x4e);
         DropItem_Func = (DropItem_pt)Scanner::FunctionFromNearCall(address);
 
-        address = Scanner::Find("\x83\x78\x08\x0a\x75\x10", "xxxxxx", 0xe);
+        address = Scanner::Find("\x83\x78\x08\x0b\x75\x10", "xxxxxx", 0xe);
         DestroyItem_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address);
 
         address = Scanner::Find("\x8b\x42\x04\x51\x23\xc1","xxxxxx",0x7);
         ChangeEquipmentVisibility_Func = (ChangeEquipmentVisibility_pt)Scanner::FunctionFromNearCall(address);
 
-        address = Scanner::Find("\x68\x21\x03\x00\x00\x89\x45\xfc", "xxxxxxxx", 0x3a);
+        address = Scanner::Find("\x68\x21\x03\x00\x00\x89\x45\xfc", "xxxxxxxx", 0x3C);
         ChangeGold_Func = (ChangeGold_pt)Scanner::FunctionFromNearCall(address);
 
         address = Scanner::Find("\x83\xc9\x01\x89\x4b\x24", "xxxxxx", 0x28);
@@ -603,8 +603,8 @@ namespace GW {
             UI::InteractionMessage message = {0};
             message.message_id = GW::UI::UIMessage::kMouseClick2;
             UI::UIPacket::kMouseAction action = {0};
-            action.child_frame_id_dupe = 1; // Salvage action
-            action.current_state = 0x6;
+            action.child_offset_id = 1; // Salvage action
+            action.current_state = GW::UI::UIPacket::ActionState::MouseDown;
             action.wparam = (void*)kit_id;
 
             uint32_t uictl_struct[7] = {0};
