@@ -846,7 +846,7 @@ namespace GW {
 
             GW::UI::UIPacket::kMouseAction action{};
             
-            action.child_frame_id_dupe = action.child_frame_id = btn_frame->child_offset_id;
+            action.child_offset_id = action.frame_id = btn_frame->child_offset_id;
             struct button_param {
                 uint32_t unk;
                 uint32_t wparam;
@@ -854,7 +854,7 @@ namespace GW {
             };
             button_param wparam = { 0, btn_frame->field100_0x1b0, 0};
             action.wparam = &wparam;
-            action.current_state = 0x6;
+            action.current_state = GW::UI::UIPacket::ActionState::MouseDown;
 
             return SendFrameUIMessage(parent_frame, GW::UI::UIMessage::kMouseClick2, &action);
         }

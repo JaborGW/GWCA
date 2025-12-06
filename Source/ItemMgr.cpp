@@ -603,8 +603,8 @@ namespace GW {
             UI::InteractionMessage message = {0};
             message.message_id = GW::UI::UIMessage::kMouseClick2;
             UI::UIPacket::kMouseAction action = {0};
-            action.child_frame_id_dupe = 1; // Salvage action
-            action.current_state = 0x6;
+            action.child_offset_id = 1; // Salvage action
+            action.current_state = GW::UI::UIPacket::ActionState::MouseDown;
             action.wparam = (void*)kit_id;
 
             uint32_t uictl_struct[7] = {0};

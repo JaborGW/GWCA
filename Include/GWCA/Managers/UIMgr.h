@@ -475,11 +475,20 @@ namespace GW {
                 uint32_t is_doubleclick;
                 uint32_t unknown_type_screen_pos;
             };
+            enum ActionState : uint32_t { 
+                MouseDown = 0x6, 
+                MouseUp = 0x7, 
+                MouseClick = 0x8, 
+                MouseDoubleClick = 0x9, 
+                DragRelease = 0xb, 
+                KeyDown = 0xe 
+            };
             struct kMouseAction {
-                uint32_t child_frame_id;
-                uint32_t child_frame_id_dupe;
-                uint32_t current_state; // 0x5 = hovered, 0x6 = mouse down
+                uint32_t frame_id;
+                uint32_t child_offset_id;
+                ActionState current_state;
                 void* wparam = 0;
+                void* lparam = 0;
             };
             struct kWriteToChatLog {
                 GW::Chat::Channel channel;
