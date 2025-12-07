@@ -846,18 +846,21 @@ namespace GW {
 
             GW::UI::UIPacket::kMouseAction action{};
             
-            action.child_offset_id = action.frame_id = btn_frame->child_offset_id;
+            action.frame_id = btn_frame->frame_id;
+            action.child_offset_id = btn_frame->child_offset_id;
+
             struct button_param {
                 uint32_t unk;
                 uint32_t wparam;
                 uint32_t lparam;
             };
-            button_param wparam = { 0, btn_frame->field100_0x1b0, 0};
+            button_param wparam = {0, btn_frame->field105_0x1c4, 0};
             action.wparam = &wparam;
-            action.current_state = GW::UI::UIPacket::ActionState::MouseDown;
+            action.current_state = GW::UI::UIPacket::ActionState::MouseUp;
 
             return SendFrameUIMessage(parent_frame, GW::UI::UIMessage::kMouseClick2, &action);
         }
+
         Frame* FrameRelation::GetFrame() {
             const auto frame = (Frame*)((uintptr_t)this - offsetof(struct Frame, relation));
             GWCA_ASSERT(&frame->relation == this);
