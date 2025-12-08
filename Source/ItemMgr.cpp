@@ -250,7 +250,7 @@ namespace {
             DropGold_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address);
         }
 
-        IdentifyItem_Func = (IdentifyItem_pt)Scanner::ToFunctionStart(Scanner::Find("\x75\x14\x68\x88\x05\x00\x00", "xxxxxxx"));
+        IdentifyItem_Func = (IdentifyItem_pt)Scanner::ToFunctionStart(Scanner::FindAssertion("ItCliApi.cpp", "context->itemTable.Get(srcItemId)", 0, 0));
 
         OnSalvagePopup_UICallback_Func = (UI::UIInteractionCallback)Scanner::ToFunctionStart(Scanner::FindAssertion("InvSalvage.cpp", "m_toolId", 0, 0), 0x200);
         InventorySlot_UICallback_Func = (UI::UIInteractionCallback)Scanner::ToFunctionStart(Scanner::FindAssertion("InvSlot.cpp", "!m_dragOverlayTexture", 0, 0), 0xfff);
