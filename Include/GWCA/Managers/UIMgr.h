@@ -47,7 +47,7 @@ namespace GW {
             uint32_t        agent_id;
             uint32_t        type; // 0 = build, 1 = equipment
             Array<wchar_t>  code;
-            wchar_t        *name;
+            wchar_t* name = nullptr;
         };
 
         struct UIChatMessage {

@@ -622,7 +622,7 @@ namespace {
             HookBase::EnableHooks(SendFrameUIMessage_Func);
         if (SendFrameUIMessageById_Func)
             HookBase::EnableHooks(SendFrameUIMessageById_Func);
-        UI::RegisterUIMessageCallback(&open_template_hook, UI::UIMessage::kOpenTemplate, OnOpenTemplate_UIMessage);
+        //UI::RegisterUIMessageCallback(&open_template_hook, UI::UIMessage::kOpenTemplate, OnOpenTemplate_UIMessage);
     }
     void DisableHooks() {
         UI::RemoveUIMessageCallback(&open_template_hook);
