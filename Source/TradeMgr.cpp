@@ -64,7 +64,7 @@ namespace GW {
             uint32_t h000c;
         } action;
         action.h000c = item_id;
-        return frame && IsItemOffered(item_id) && UI::SendFrameUIMessage(frame, (UI::UIMessage)0x2e, &action);
+        return frame && IsItemOffered(item_id) && UI::SendFrameUIMessage(frame, GW::UI::UIMessage::kMouseClick2, &action);
     }
 
     TradeItem* Trade::IsItemOffered(uint32_t item_id) {
@@ -86,12 +86,14 @@ namespace GW {
         struct {
             uint32_t h0000 = 0;
             uint32_t h0004 = 2;
-            uint32_t h0008 = 6;
+            uint32_t h0008 = 7;
             uint32_t* h000c;
         } action;
+
         uint32_t item_id_and_qty[] = { item_id, quantity };
         action.h000c = item_id_and_qty;
+        action.h0000 = frame->frame_id;
 
-        return frame && !IsItemOffered(item_id) && UI::SendFrameUIMessage(frame, (UI::UIMessage)0x2e, &action);
+        return frame && !IsItemOffered(item_id) && UI::SendFrameUIMessage(frame, GW::UI::UIMessage::kMouseClick2, &action);
     }
 } // namespace GW

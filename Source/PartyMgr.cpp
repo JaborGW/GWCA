@@ -214,7 +214,7 @@ namespace GW {
         }
 
         bool ReturnToOutpost() {
-            return UI::ButtonClick(UI::GetChildFrame(UI::GetFrameByLabel(L"DlgRedirect"), 1));
+            return UI::ButtonClick(UI::GetChildFrame(UI::GetFrameByLabel(L"DlgRedirect"), 0));
         }
 
         bool GetIsPartyInHardMode() {
