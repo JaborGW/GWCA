@@ -82,12 +82,12 @@ namespace {
     void Init() {
         // This function runs every time an update is made to the party window
 
-        uintptr_t address = Scanner::Find("\x68\xfb\x0b\x01\x00", "xxxxx", 0x16);
+        uintptr_t address = Scanner::Find("\x68\xfb\x0b\x01\x00", "xxxxx", 0x21);
         if (address)
             TickButtonUICallback = (UI::UIInteractionCallback)Scanner::FunctionFromNearCall(*(uintptr_t*)address);
 
-        address = Scanner::Find("\x89\x46\x20\xF7", "xxxx", 0xBB); // NB: UI Message 0x10000128 lands within hard mode button ui callback
-        if (address) 
+        address = Scanner::Find("\x83\x3B\x00\x0F\x85\x00\x00\x00\x00\xFF\x70\x20","xxxxx????xxx", 0x0C); // NB: UI Message 0x10000128 lands within hard mode button ui callback
+        if (address)
             SetDifficulty_Func = (DoAction_pt)Scanner::FunctionFromNearCall(address);
 
         address = Scanner::Find("\x8b\x78\x4c\x8d\x8f\x9c\x00\x00\x00", "xxxxxxxxx", -0xc);
